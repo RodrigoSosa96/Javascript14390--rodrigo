@@ -3,86 +3,86 @@ const datos = [{
     "categoria": "Fernet",
     "marca": "Branca",
     "features": "1lt",
-    "stock": 10,
-    "precio": 750
+    "precio": 750,
+    "stock": 10
     //img link
 }, {
     "id": 2,
     "categoria": "Fernet",
     "marca": "1882",
     "features": "500ml",
-    "stock": 10,
-    "precio": 350
+    "precio": 350,
+    "stock": 10
 
 }, {
     "id": 3,
     "categoria": "Vodka",
     "marca": "Absolut",
     "features": "500ml",
-    "stock": 10,
-    "precio": 900
+    "precio": 900,
+    "stock": 10
 }, {
     "id": 4,
     "categoria": "Vodka",
     "marca": "Sky",
     "features": "750ml",
-    "stock": 10,
-    "precio": 500
+    "precio": 500,
+    "stock": 10
 }, {
     "id": 5,
     "categoria": "Whisky",
     "marca": "Chivas",
     "features": "1 lt",
-    "stock": 10,
-    "precio": 3500
+    "precio": 3500,
+    "stock": 10
 }, {
     "id": 6,
     "categoria": "Whisky",
     "marca": "Johny walker Black",
     "features": "1 lt",
-    "stock": 10,
-    "precio": 3800
+    "precio": 3800,
+    "stock": 10
 }, {
     "id": 7,
     "categoria": "Whisky",
     "marca": " Jack Daniel's",
     "features": "750ml",
-    "stock": 10,
-    "precio": 4200
+    "precio": 4200,
+    "stock": 10
 }, {
     "id": 8,
     "categoria": "Whisky",
     "marca": "Johnny Walker Red",
     "features": "1 lt",
-    "stock": 10,
-    "precio": 2140
+    "precio": 2140,
+    "stock": 10
 }, {
     "id": 9,
     "categoria": "Vodka",
     "marca": "Grey Goose",
     "features": "750ml",
-    "stock": 10,
-    "precio": 6000
+    "precio": 6000,
+    "stock": 10
 }, {
     "id": 10,
     "categoria": "Cerveza",
     "marca": "Andes Rubia x6",
     "features": "473ml",
-    "stock": 10,
-    "precio": 418
+    "precio": 418,
+    "stock": 10
 }, {
     "id": 11,
     "categoria": "Cerveza",
     "marca": "Corona x10",
     "features": "269ml",
-    "stock": 10,
-    "precio": 565
+    "precio": 565,
+    "stock": 10
 }, {
     "id": 12,
     "categoria": "Cerveza",
     "marca": "Patagonia x6 ",
     "features": "473ml",
-    "stock": 10,
-    "precio": 637
+    "precio": 637,
+    "stock": 10
 }
 ];

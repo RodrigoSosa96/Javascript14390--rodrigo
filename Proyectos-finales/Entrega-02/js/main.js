@@ -16,22 +16,21 @@ Estilos basicos, pero por ahora funcionales para esta entrega por cuestion de ti
 var idNuevo = 10
 
 class articulo{
-    constructor( categoria, marca, features, precio, stock) {
+    constructor( id, categoria, marca, features, precio, stock, descuento) {
         this.id = idNuevo++;
         this.categoria = categoria;
         this.marca = marca;
         this.features = features
         this.precio = precio;
         this.stock = parseInt(stock);//agregar if 0(disculpe, pero ya no hay)
-        //this.iva = 0.21;
-        //this.descuento = 0; //porcentaje
+        this.descuento = descuento; //porcentaje
     }
     //comprobar stock
     vendido(){
             this.stock = this.stock - 1
     }
     agregardescuento() {
-        this.stock = this.stock - 1
+        this.precio = this.precio - (this.precio * 0.20)
 
     }
     //hay stock?
@@ -83,26 +82,27 @@ function crearElemento(dato){
                                 <p>Categoría: ${dato.categoria}</p>
                                 <p>Marca: ${dato.marca}</p>
                                 <p>Características: ${dato.features}</p>
-                                <p id=stock${dato.id} >Stock: ${dato.stock} unidades</p>
                                 <p>Precio: $ ${dato.precio}</p>
+                                <p id=stock${dato.id} >Stock: ${dato.stock} unidades</p>
                                 <button id="${dato.id}">Agregar</button>
                                 </div>
                                 `
     contenedorPadre.appendChild(nuevoElemento)
     let boton = document.getElementById(dato.id)
     boton.onclick = () => {       //Con cada click se actualiza el stock y en caso de no haber más, se bloquea el botón.
-        document.getElementById('stock'+dato.id).innerHTML = `Stock: ${dato.stock} unidades`
-
-        if(dato.stock == 0) {
-            console.log("No hay stock")
+        
+        if(dato.stock > 0) {
+            console.log("PRODUCTO VENDIDO" + dato.id);
+            dato.vendido()  
+            document.getElementById('stock'+dato.id).innerHTML = `Stock: ${dato.stock} unidades`
             
-            document.getElementById(dato.id).disabled = true;
             
         } else {
-            console.log("PRODUCTO VENDIDO" + dato.id);
-            dato.vendido()
+            console.log("No hay stock")
+            document.getElementById(dato.id).disabled = true;
 
         }
+
     };
 }
 //despues de comprar ya hay menos articulos en la siguiente sesión con localstorage
@@ -118,21 +118,21 @@ let entradaForm = document.getElementById("formulario")
 entradaForm.onsubmit = (e) => {
     e.preventDefault();
     dataform = {
-        categoria: e.target.children[2].value,
-        marca: e.target.children[4].value,
-        features: e.target.children[6].value,
-        stock: e.target.children[8].value,
-        precio: e.target.children[10].value
+        categoria: e.target.children[1].value,
+        marca: e.target.children[3].value,
+        features: e.target.children[5].value,
+        stock: e.target.children[7].value,
+        precio: e.target.children[9].value
     }
     //idNuevo++;
-    datos.push(new articulo( dataform.categoria, dataform.marca, dataform.features, dataform.stock, dataform.precio))
+    formData.push(new articulo( dataform.categoria, dataform.marca, dataform.features, dataform.precio, dataform.stock))
     document.getElementById("idForm").innerHTML = `${idNuevo}`  
-    crearElemento(datos)
-
+    for(let dato of formData) {
+        crearElemento(dato)
+    }
     //sessionStorage.setItem('nuevo', (JSON.stringify(dataform)))
     //Faltaría Crear el elemento correspondiente. Eso te lo dejo a vos
 }
-localStorage.clear()
 
 //formParse = sessionStorage.getItem("nuevo");
 //formParse = JSON.parse(formParse)
