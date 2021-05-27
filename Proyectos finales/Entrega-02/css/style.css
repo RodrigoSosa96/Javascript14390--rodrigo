@@ -1,0 +1,33 @@
+body {
+    background-color: #171B1F;
+}
+h1 {
+    color: #e0eaff;
+}
+form {
+    color: #e0eaff;
+}
+.items {
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #fff6f0;
+}
+div#listaProductos {
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 5px 5px;
+}
+div#agregados {
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 5px 5px;
+}
+button#carrito {
+    float: right;
+    font-size: 1.5em;
+}
+/*solo para que se vea mejor por ahora*/
