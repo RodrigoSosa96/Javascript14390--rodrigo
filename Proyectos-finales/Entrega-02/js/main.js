@@ -16,7 +16,7 @@ Estilos basicos, pero por ahora funcionales para esta entrega por cuestion de ti
 var idNuevo = 10
 
 class articulo{
-    constructor(id, categoria, marca, features, precio, stock) {
+    constructor( categoria, marca, features, precio, stock) {
         this.id = idNuevo++;
         this.categoria = categoria;
         this.marca = marca;
@@ -69,6 +69,8 @@ const pref = "productoID"
 
 let contenedorPadre = document.getElementById("listaProductos")
 
+
+
 for(let dato of holaa) {
     crearElemento(dato)
 }
@@ -110,39 +112,32 @@ function crearElemento(dato){
 
 
 const formData = []
-const form = document.forms[0];
-
-form.addEventListener("submit", function(event) {
-    event.preventDefault();
-    const { name, description, task } = this.elements;
-    // or
-    // const { name, description, task } = event.target.elements;
-    console.log(name.value, description.value, task.value);
-});
-/*
 //formulario nuevos elementos
-document.getElementById("idForm").innerHTML = `${idNuevo}`  
+document.getElementById("idForm").innerHTML = `Articulo numero: ${idNuevo}`  
 let entradaForm = document.getElementById("formulario")
 entradaForm.onsubmit = (e) => {
     e.preventDefault();
     dataform = {
-        id: e.target.children[1],
         categoria: e.target.children[2].value,
         marca: e.target.children[4].value,
         features: e.target.children[6].value,
         stock: e.target.children[8].value,
         precio: e.target.children[10].value
     }
-    idNuevo++;
-    formData.push(new articulo(idNuevo))
-    sessionStorage.setItem('nuevo', (JSON.stringify(dataform)))
+    //idNuevo++;
+    datos.push(new articulo( dataform.categoria, dataform.marca, dataform.features, dataform.stock, dataform.precio))
     document.getElementById("idForm").innerHTML = `${idNuevo}`  
+    crearElemento(datos)
+
+    //sessionStorage.setItem('nuevo', (JSON.stringify(dataform)))
     //Faltaría Crear el elemento correspondiente. Eso te lo dejo a vos
 }
-formParse = sessionStorage.getItem("nuevo");
-formParse = JSON.parse(formParse)
-console.log(formParse)
-*/
+localStorage.clear()
+
+//formParse = sessionStorage.getItem("nuevo");
+//formParse = JSON.parse(formParse)
+
+//console.log(formParse)
 
 
 
