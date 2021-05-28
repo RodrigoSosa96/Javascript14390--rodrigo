@@ -99,12 +99,12 @@ function crearElemento(dato){
     boton.onclick = () => {       //Con cada click se actualiza el stock y en caso de no haber más, se bloquea el botón.
         
         if(dato.stock >= 1) {
-            carrito(dato.id)
             
             console.log("PRODUCTO VENDIDO" + dato.id);
             dato.vendido()  
             document.getElementById('stock'+dato.id).innerHTML = `Stock: ${dato.stock} unidades`
-            
+            carrito(dato.id)
+        
             
         } else {
             console.log("No hay stock")
@@ -133,22 +133,52 @@ function guardarTarea(){
 
 
 
-
 //Generar Carrito(modificar)
 const carritoStorage = []
 function carrito(ids){
     item = busqueda(ids)
-    console.log(item)
     carritoStorage.push(item)
+
     carritoJSON = JSON.stringify(carritoStorage)
+    sessionStorage.setItem("carrito", carritoJSON)
+
     let body = document.getElementById("tablaCarrito").children[1];
     let inner = "";
-    for (const e of item) {
+    for (const e of carritoStorage) {
         inner += `<tr><td>${e.categoria}</td><td>${e.marca}</td><td>${e.features}</td><td>${e.stock}</td><td>${e.precio}</td></tr>`;
     }
     body.innerHTML = inner;
+    
+}
+//Honestamente StackOverflow
+Array.prototype.sum = function (prop) {
+    var total = 0
+    for ( var i = 0, _len = this.length; i < _len; i++ ) {
+        total += this[i][prop]
+    }
+    return total
+}
+//Suma de carrito
+let subTotal = carritoStorage.sum("precio")
+let subTotalHTML = document.getElementById("totales")
+function carritoPrecio () {
+    let nuevoElemento = document.createElement("div")
+    nuevoElemento.innerHTML = `
+                                <p>Gracias por comprar con nosotros :)</p>
+                                <p>Su total en : $${carritoStorage.sum("precio")}</p>
+
+    `
+    subTotalHTML.appendChild(nuevoElemento)
 
 }
+
+
+
+
+//operaciones   
+const suma  = (a,b,c) => a + b + c;
+const sumaTotal =(d, f) => d + f;
+const iva   = x => x * 0.21;
 
 
 
@@ -171,7 +201,7 @@ window.onload = () => {
     // SECCION DE ASOCIACIÓN DE EVENTOS EN ONLOAD ASI NOS ASEGURAMOS DE ASOCIAL UNA VEZ QUE EL DOM ESTA LISTO
     document.getElementById("submitBtn").onclick =  guardarTarea;
     document.getElementById("resetBtn").onclick = clearAll;
-    document.getElementById("")
+    document.getElementById("carritoComprar").onclick = carritoPrecio
 }
 
 //Inicialización
