@@ -28,9 +28,7 @@ class articulo{
     sumarIva(){
         this.precio = this.precio + (this.precio * 0.21);
     }
-    restarDescuento(){
-        this.precio = this.precio - (this.descuento * this.precio);
-    }
+
 
 }
 
@@ -175,20 +173,6 @@ function carritoPrecio () {
 
 
 
-//operaciones   
-const suma  = (a,b,c) => a + b + c;
-const sumaTotal =(d, f) => d + f;
-const iva   = x => x * 0.21;
-
-
-
-
-
-
-
-
-
-
 
 
 function clearAll() {
@@ -198,18 +182,10 @@ function clearAll() {
 
 
 window.onload = () => {
-    // SECCION DE ASOCIACIÓN DE EVENTOS EN ONLOAD ASI NOS ASEGURAMOS DE ASOCIAL UNA VEZ QUE EL DOM ESTA LISTO
     document.getElementById("submitBtn").onclick =  guardarTarea;
     document.getElementById("resetBtn").onclick = clearAll;
     document.getElementById("carritoComprar").onclick = carritoPrecio
 }
-
-//Inicialización
-
-
-
-
-
 
 
 function busqueda(id) {
