@@ -1,76 +1,91 @@
 //Tienda de bebidas con carrito y articulos en stock actualizables
 /*
+Se crean elementos desde el storage, no desde datos, para asi mantener los articulos nuevos que agrego
 El stock se mantiene con localstorage para saber qué se fue comprando
-Estilos basicos, pero por ahora funcionales para esta entrega por cuestion de tiempo
+Estilos basicos, pero por ahora funcionales para esta entrega
 
 */
 
-
-
-
-
-//Almacenar producto por producto
-
-// o almacenar array completo
-
-var idNuevo = 10
-
+let idNuevo = 1//id base para nuevos articulos
+let idcheck = 100
 class articulo{
-    constructor( id, categoria, marca, features, precio, stock, descuento) {
+    constructor( categoria, marca, features, precio, stock, descuento) {
         this.id = idNuevo++;
         this.categoria = categoria;
         this.marca = marca;
         this.features = features
-        this.precio = precio;
-        this.stock = parseInt(stock);//agregar if 0(disculpe, pero ya no hay)
-        this.descuento = descuento; //porcentaje
+        this.precio = parseInt(precio);
+        this.stock = parseInt(stock);
+        this.iva = 0.21
     }
     //comprobar stock
     vendido(){
             this.stock = this.stock - 1
     }
-    agregardescuento() {
-        this.precio = this.precio - (this.precio * 0.20)
 
+    aplicarDescuento(descuento) {
+        this.precio = this.precio - (this.precio * (descuento / 100))
     }
-    //hay stock?
-    /*
-    estaDisponible(){
-        return !this.stock;
-    }
-    */
     sumarIva(){
         this.precio = this.precio + (this.precio * this.iva);
     }
     restarDescuento(){
         this.precio = this.precio - (this.descuento * this.precio);
     }
+
 }
 
-
-
-
-
-//Agrego datos a storage
-datosJSON = JSON.stringify(datos)
-sessionStorage.setItem("listaProductos", datosJSON)
-const datosGetJSON = sessionStorage.getItem("listaProductos")
-const datosParse = JSON.parse(datosGetJSON)
-
-const holaa = []
-for(let prod of datosParse) {
-    holaa.push(new articulo(prod.id, prod.categoria, prod.marca, prod.features, prod.precio, prod.stock))
+//Duda: cómo haría para agregar todos los objetos a una array?, o sea sin las propiedades, para ahorrar espacio al almacenarlo en el storage
+/*
+for (let e = 0; e < datos.length; e++) {
+    console.log(Object.values(datos[e]));
 }
+
+ejemplo = datos.map(a => [a.id, a.categoria, a.marca, a.features, a.precio, a.stock])
+*/
+
+
+//Chequea si hay determinada llave en el storage
+function checkStorage (key) {
+    if (key in sessionStorage) {
+        console.log("si")
+
+
+    }else {
+        console.log("no")
+        makeStorage()
+    }
+}
+checkStorage('listaProductos')
+
+
+
+//Luego puedo hacerlo mas dinamico para distintas llaves junto al checkStorage (creo)
+function makeStorage() {
+    datosJSON = JSON.stringify(datos)
+    sessionStorage.setItem("listaProductos", datosJSON)
+}
+
+const datosParse = JSON.parse(sessionStorage.getItem('listaProductos'))
+
+
+//Construyo array desde Storage
+const datosArmados = []
+for(let e of datosParse) {
+    datosArmados.push(new articulo( e.categoria, e.marca, e.features, e.precio, e.stock))
+}
+console.table(datosArmados)
+
+
 
 
 
 const pref = "productoID"
-
 let contenedorPadre = document.getElementById("listaProductos")
 
 
 
-for(let dato of holaa) {
+for(let dato of datosArmados) {
     crearElemento(dato)
 }
 
@@ -91,7 +106,7 @@ function crearElemento(dato){
     let boton = document.getElementById(dato.id)
     boton.onclick = () => {       //Con cada click se actualiza el stock y en caso de no haber más, se bloquea el botón.
         
-        if(dato.stock > 0) {
+        if(dato.stock >= 1) {
             console.log("PRODUCTO VENDIDO" + dato.id);
             dato.vendido()  
             document.getElementById('stock'+dato.id).innerHTML = `Stock: ${dato.stock} unidades`
@@ -100,6 +115,7 @@ function crearElemento(dato){
         } else {
             console.log("No hay stock")
             document.getElementById(dato.id).disabled = true;
+
 
         }
 
@@ -113,7 +129,7 @@ function crearElemento(dato){
 
 const formData = []
 //formulario nuevos elementos
-document.getElementById("idForm").innerHTML = `Articulo numero: ${idNuevo}`  
+//document.getElementById("idForm").innerHTML = `Articulo numero: ${idcheck}`  
 let entradaForm = document.getElementById("formulario")
 entradaForm.onsubmit = (e) => {
     e.preventDefault();
@@ -124,26 +140,11 @@ entradaForm.onsubmit = (e) => {
         stock: e.target.children[7].value,
         precio: e.target.children[9].value
     }
-    //idNuevo++;
-    formData.push(new articulo( dataform.categoria, dataform.marca, dataform.features, dataform.precio, dataform.stock))
-    document.getElementById("idForm").innerHTML = `${idNuevo}`  
-    for(let dato of formData) {
-        crearElemento(dato)
-    }
+    datosArmados.push(new articulo(dataform.categoria, dataform.marca, dataform.features, dataform.precio, dataform.stock))
+    //document.getElementById("idForm").innerHTML = `${idcheck}`  
+    let ultimoPush = datosArmados.length - 1
+    crearElemento(datosArmados[ultimoPush])//Si funciona pero da error a la consola, realmente funciona?
     //sessionStorage.setItem('nuevo', (JSON.stringify(dataform)))
-    //Faltaría Crear el elemento correspondiente. Eso te lo dejo a vos
 }
-
-//formParse = sessionStorage.getItem("nuevo");
-//formParse = JSON.parse(formParse)
-
-//console.log(formParse)
-
-
-
-////un for para agregar cada elemento agregado
-//for (const producto of misProductosParseados) { //Instanciar objetos de la clase Producto
-//    productosReArmados.push(new Producto(producto.id, producto.desc, producto.precio));
-//}
 
 
