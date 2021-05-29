@@ -11,19 +11,10 @@ class articulo{
         //this.iva = 0.21;
         //this.descuento = 0; //porcentaje
     }
-    //comprobar stock
-    hayStock(){
-        this.stock = true;
-    }
     agregardescuento() {
         this.descuento = 0.20;//default
     }
-    //hay stock?
-    /*
-    estaDisponible(){
-        return !this.stock;
-    }
-    */
+
     sumarIva(){
         this.precio = this.precio + (this.precio * this.iva);
     }
@@ -44,38 +35,46 @@ for(let dato of datos) {
 function crearElemento(dato){
     let nuevoElemento   = document.createElement("div")
     nuevoElemento.id    =pref + dato.id
-    nuevoElemento.innerHTML = 
+    nuevoElemento.innerHTML =   
                                 `<div class="items">
                                 <p>Categoría: ${dato.categoria}</p>
                                 <p>Marca: ${dato.marca}</p>
                                 <p>Características: ${dato.features}</p>
-                                <p>Stock: ${dato.stock} unidades</p>
                                 <p>Precio: $ ${dato.precio}</p>
-                                <button id="${dato.id}">Comprar</button>
+                                <p id=stock${dato.id} >Stock: ${dato.stock} unidades</p>
+                                <button id=${dato.id}>Agregar</button>
                                 </div>
-
                                 `
     contenedorPadre.appendChild(nuevoElemento)
     let boton = document.getElementById(dato.id)
-    boton.onclick = () => {
-        console.log("PRODUCTO VENDIDO" + dato.id);
+    boton.onclick = () => {       //Con cada click se actualiza el stock y en caso de no haber más, se bloquea el botón.
+        if(dato.stock >= 1) {
+            
+            console.log("PRODUCTO VENDIDO" + dato.id);
+            dato.stock = dato.stock - 1
+            document.getElementById('stock'+dato.id).innerHTML = `Stock: ${dato.stock} unidades`        
+            
+        } else {
+            console.log("No hay stock")
+            document.getElementById(dato.id).disabled = true;
+        }
+
     };
 }
-
 
 
 
 let entradaForm = document.getElementById("formulario")
 entradaForm.onsubmit = (e) => {
     e.preventDefault();
-    let dataform = {
-        categoria: e.target.children[0].value,
-        marca: e.target.children[1].value,
-        features: e.target.children[2].value,
-        stock: e.target.children[3].value,
-        precio: e.target.children[4].value
+    dataform = {
+        categoria: e.target.children[1].value,
+        marca: e.target.children[3].value,
+        features: e.target.children[5].value,
+        stock: e.target.children[7].value,
+        precio: e.target.children[9].value
     }
-    return dataform
+    crearElemento(dataform)
 
 }
 
