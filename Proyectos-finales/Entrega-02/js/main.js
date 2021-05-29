@@ -113,7 +113,10 @@ function crearElemento(dato){
 }
 
 //Agregar elementos a los articulos
-function guardarTarea(){
+
+//Required element como chequeo?
+
+function nuevoProducto(){
     let nuevoRegistro = {
         id            : datosArmados.length + 1,
         categoria     : document.getElementById("categoriaProducto").value,
@@ -182,7 +185,7 @@ function clearAll() {
 
 
 window.onload = () => {
-    document.getElementById("submitBtn").onclick =  guardarTarea;
+    document.getElementById("submitBtn").onclick =  nuevoProducto;
     document.getElementById("resetBtn").onclick = clearAll;
     document.getElementById("carritoComprar").onclick = carritoPrecio
 }
