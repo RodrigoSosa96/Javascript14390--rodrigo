@@ -206,8 +206,8 @@ function busqueda(id) {
     return datosArmados.find(producto => producto.id === id); 
 }
 
-//Animaciones jquery
 
+//Animaciones jquery
 
 $("#showCart").click(() => { 
     $("#toggleList").toggle("slow");
@@ -216,3 +216,12 @@ $("#showCart").click(() => {
 $(".container").fadeIn(2500, function() {
     $("h1").fadeIn(3500)
 })
+
+
+//Cómo hago para hacer un scroll al final del div?, pero que el final quede abajo de la ventana, no arriba
+$('#submitBtn').click( function(e) { 
+    $("html, body").animate({
+        scrollTop: $("#listaProductos").get(0).scrollHeight
+    }, 2000);
+} );
+
