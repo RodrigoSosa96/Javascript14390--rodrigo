@@ -18,3 +18,7 @@ div#listaProductos > div {
 .carrito {
     margin-top: 1.5em;
 }
+svg {
+    position: absolute;
+    width: 0px;
+}
