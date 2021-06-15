@@ -1,0 +1,24 @@
+body {
+    margin-bottom: 100px;
+}
+div#listaProductos {
+    margin-top: 2.5em;
+    display: grid;
+    margin: 0 auto;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(233px, 1fr));
+    grid-auto-rows: auto;
+}
+div#listaProductos > div {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 1em 5px 0.2em 1em ;
+    background-color: rgb(177, 180, 206);
+}
+.carrito {
+    margin-top: 1.5em;
+}
+svg {
+    position: absolute;
+    width: 0px;
+}
