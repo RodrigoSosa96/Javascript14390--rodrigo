@@ -19,9 +19,8 @@
 
 
 */
-
-
-//? revisar
+const datos = []
+const categoria = ['Fernet', 'Cerveza', 'Vodka', 'Whisky', 'Otro']
 let id = 1 // Init id
 class articulo{
     constructor(datos) {
@@ -109,7 +108,7 @@ function crearElementoJQ(dato) {
                                     <p>Características: ${dato.features}</p>
                                     <p>Precio: $ ${dato.precio}</p>
                                     <p id=stock${dato.id} >Stock: ${dato.stock} unidades</p>
-                                    <button disabled id=${dato.id}>Agregar</button>
+                                    <button id=${dato.id}>Agregar</button>
                                     </div>
                                     </div>
                                     `);
@@ -133,14 +132,8 @@ function crearElementoJQ(dato) {
     )
 }
 
-var btnHandler = function (event) {
-    valor = $("#stock1").html()
-    valor.replaceWith("/\D/g", "")
-    return console.log(valor)
 
-}
-let numero = "hola54545451"
-let onlyNumero = numero.replace("hola", "")
+
 
 //?porqué no anda si lo escribo fuera? ahí lo puse directamente con el primero como ejemplo, pero ni as toma el click
 
@@ -206,6 +199,10 @@ Array.prototype.sum = function (prop) {
 //Suma de carrito
 
 //en jquery directamente reemplazo mas facil sin repetir al agregar elementos luego
+
+
+
+
 let subTotal = carritoStorage.sum("precio")
 let subTotalHTML = document.getElementById("totales")
 function carritoPrecio () {
@@ -218,6 +215,22 @@ function carritoPrecio () {
     subTotalHTML.appendChild(nuevoElemento)
 
 }
+
+function carritoPrecio2() {
+    $("#totales").append(`<div>
+                                <p>Gracias por comprar con nosotros :)</p>
+                                <p>Su total en : $${carritoStorage.sum("precio")}</p>
+                        </div>
+    `
+    )
+}
+
+
+
+
+
+
+
 
 
 
