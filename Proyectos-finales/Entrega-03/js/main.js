@@ -97,7 +97,6 @@ const settingsVenta = {
 }
 
 dataafuera = []
-//!test boton de carga
 
 
 $.ajax(settingsGET).done(function (response) {
@@ -122,23 +121,10 @@ $.ajax(settingsGET).done(function (response) {
 })
 
 
-/*
-! TEST
-$("#testBtn").click(function (e) { 
-    e.preventDefault();
-    $.ajax(settingsGET).done(function (response) {
-        console.log(response)
-        hola = response
-        return hola
 
-    });
-});
-
-*/
 
 
 //*Parseo de datos
-
 
 function crearDatos(data) {
     for(let e of data) {
@@ -284,16 +270,6 @@ function carritoPrecio() {
 
 
 
-
-
-
-
-
-
-
-
-
-
 function clearAll() {
     localStorage.clear();
     location.reload();
@@ -318,8 +294,7 @@ function busqueda(id) {
 $("#showCart").click(() => { 
     $("#toggleList").toggle("slow");
 });
-//! poner tiempo de container a 2500 ish
-$(".container").fadeIn(0, function() {
+$(".container").fadeIn(2500, function() {
     $("h1").fadeIn(3500)
 })
 
@@ -337,9 +312,9 @@ $('#submitBtn').click( function(e) {
 
 
 //Animamos sus propiedades CSS con animate
-//!!!
-//$("h1").fadeIn("fast")
-//$("svg").delay(2500).animate({  width: "380px", display: "block"}, 2000) //.mouseover(() => $("svg").animate({filter: "brightness(150%)"}))
+
+$("h1").fadeIn("fast")
+$("svg").delay(2500).animate({  width: "380px", display: "block"}, 2000) //.mouseover(() => $("svg").animate({filter: "brightness(150%)"}))
 
 
 
