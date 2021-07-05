@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Table - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="assets/css/responsiveCards.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <div class="container-fluid">
+                    <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                        <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="index.html">
+                                <div class="sidebar-brand-icon rotate-n-15"><i class="far fa-star"></i></div>
+                                <div class="sidebar-brand-text mx-3"><span>Altos viñedos</span></div>
+                            </a><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="admin.html">
+                                <div class="sidebar-brand-icon rotate-n-15"><i class="far fa-sun"></i></div>
+                                <div class="sidebar-brand-text mx-3"><span>Admin</span></div>
+                            </a></div>
+                    </nav>
+                    <h3 class="text-dark mb-4" style="color: var(--bs-blue);">Articulos</h3>
+                        <div class="container">
+                            <div id="listaProductos" class="row">
+
+                                <!-- js productos-->
+                            </div>
+                        </div>
+                    <div class="card shadow">
+                        <div class="card-header py-3">
+                            <p class="text-primary m-0 fw-bold" style="font-size: 28px;">Carrito&nbsp;&nbsp;<button class="btn btn-primary" type="button"><i class="fa fa-arrow-down"></i></button></p>
+                        </div>
+                        <div class="card-body" id="toggleList" style="display: ;"><!-- cambiar!!!!!-->
+                            <div class="col"></div>
+                            <div class="row">
+                                <div class="col-md-6 text-nowrap">
+                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label class="form-label">Ordenar por&nbsp; &nbsp;<select class="d-inline-block form-select form-select-sm">
+                                                <option value="categoria" selected="">Categoría</option>
+                                                <option value="marca">Marca</option>
+                                                <option value="caracteristicas">Características</option>
+                                                <option value="precio">Precio</option>
+                                                <option value="stock">Stock</option>
+                                            </select>&nbsp;</label></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-md-end dataTables_filter" id="dataTable_filter"><label class="form-label"><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
+                                </div>
+                            </div>
+                            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                <table class="table my-0" id="tablaCarrito">
+                                    <thead>
+                                        <tr>
+                                            <th>Categoría</th>
+                                            <th>Marca</th>
+                                            <th>Caracteristicas</th>
+                                            <th>Stock</th>
+                                            <th>Precio</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar1.jpeg">Fernet</td>
+                                            <td>Branca</td>
+                                            <td>1 litro</td>
+                                            <td>33</td>
+                                            <td>$500</td>
+                                        </tr>
+
+                                        
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td><strong>Categoría</strong></td>
+                                            <td><strong>Marca</strong></td>
+                                            <td><strong>Office</strong></td>
+                                            <td><strong>Age</strong></td>
+                                            <td><strong>Start date</strong></td>
+                                            <td></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p style="padding-right: 20px;margin: -4px;margin-bottom: 0;font-size: 24px;text-align: left;">Total: ####</p>
+                                    <p style="margin-top: 17px;">Gracias por su compra, su total fue ####</p>
+                                </div>
+                                <div class="col"><button class="btn btn-primary" type="button" style="padding: 4px 12px;margin: 10px;margin-top: 20px;margin-right: 0px;margin-bottom: 9px;margin-left: 1px;">Comprar</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Rodrigo Sosa 2021</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/lib/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/apiSettings.js"></script>
+    <script src="assets/js/constructor.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
