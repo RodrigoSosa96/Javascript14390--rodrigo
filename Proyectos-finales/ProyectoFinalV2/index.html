@@ -31,7 +31,9 @@
                     <h3 class="text-dark mb-4" style="color: var(--bs-blue);">Articulos</h3>
                         <div class="container">
                             <div id="listaProductos" class="row">
-
+                                <div id="loading-image" class="spinner-border text-secondary vertical-center" role="status" style="display:none">
+                                    <span class="sr-only">Loading...</span>
+                                  </div>
                                 <!-- js productos-->
                             </div>
                         </div>
@@ -62,7 +64,7 @@
                                             <th>Categoría</th>
                                             <th>Marca</th>
                                             <th>Caracteristicas</th>
-                                            <th>Stock</th>
+                                            <th>Cantidad</th>
                                             <th>Precio</th>
                                         </tr>
                                     </thead>
@@ -74,20 +76,17 @@
                                             <td><strong>Categoría</strong></td>
                                             <td><strong>Marca</strong></td>
                                             <td><strong>Caracteristicas</strong></td>
-                                            <td><strong>Stock</strong></td>
+                                            <td><strong id="CantTotal">Cantidad</strong></td>
                                             <td><strong>Precio</strong></td>
                                             <td></td>
                                         </tr>
                                     </tfoot>
                                 </table>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <p style="padding-right: 20px;margin: -4px;margin-bottom: 0;font-size: 24px;text-align: left;">Total: ####</p>
-                                    <p style="margin-top: 17px;">Gracias por su compra, su total fue ####</p>
-                                </div>
-                                <div class="col"><button class="btn btn-primary" type="button" style="float-right">Comprar</button></div>
+                            <div id="compraHecha" class="row">
+                                <!--Gracias por su compra-->
                             </div>
+                            <div class="col"><button class="btn btn-primary" type="button" id="carritoComprar">Comprar</button></div>
                         </div>
                     </div>
                 </div>

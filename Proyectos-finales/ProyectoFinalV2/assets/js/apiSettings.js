@@ -17,6 +17,9 @@ var settingsGET = {
     "crossDomain": true,
     "url": ajaxURL+"/latest",
     "method": "GET",
+    "beforeSend": function() {
+        $('#loading-image').show(); // No me gusta como lo implementé :/
+    },
     "headers": {
         "X-Master-Key": apiKey,
     },

@@ -22,6 +22,7 @@
 
 //* Checkea si se agregaron datos desde admin
 $.ajax(settingsGET).done(function (response) {
+    $('#loading-image').hide();
     console.log(response)
     datosAJAX = response
 
@@ -85,7 +86,9 @@ function crearElemento(dato) {
     //?porqué no anda si lo escribo fuera?
     $("#art" + dato.id).click(()=> {
         if(dato.stock >=1) {
-            dato.vendido(), carrito(dato.id)
+            dato.vendido(),
+            carrito(dato.id)
+            $("#CantTotal").html(`${carritoStorage.length}`)
             $("#stock"+dato.id)
                 .html(` <i class="fas fa-clipboard-list"></i> Stock ${dato.stock} `)
                 .prop("disabled", dato.stock > 1 )
@@ -119,27 +122,46 @@ function checkStorage (key) {
 checkStorage('carrito')
 
 //crea carrito
-function makeStorage() {
+function makeStorageTEST() {
     $.ajax(settingsPUT).done(function (response) {
         console.log(response)
     })
 }
 
-function carrito(ids){
-    item = busqueda(ids)
-    carritoStorage.push(item)
+function makeCarrito () {
+    const carritoParse = JSON.parse(localStorage.getItem(''))
+    for(let e of carritoParse) {
+        carritoStorage.push(e)
+    }
 
+}
+
+
+
+function test() {
+    if ("carrito" in localStorage) {
+        
+    }
+    else {
+        
+    }
+}
+
+
+function carrito(ids){
+    item = datosArmados.find(producto => producto.id === ids)
+    carritoStorage.push(item)
     carritoJSON = JSON.stringify(carritoStorage)
     localStorage.setItem("carrito", carritoJSON)
-
     let body = document.getElementById("tablaCarrito").children[1];
     let inner = "";
     for (const e of carritoStorage) {
-        inner += `<tr><td>${e.categoria}</td><td>${e.marca}</td><td>${e.features}</td><td>${e.stock}</td><td>${e.precio}</td></tr>`;
+        inner += `<tr><td>${e.categoria}</td><td>${e.marca}</td><td>${e.features}</td><td>1</td><td>${e.precio}</td></tr>`;
     }
     body.innerHTML = inner;
     
 }
+
 
 
 //Honestamente StackOverflow para sumar arrays mas rápido 
@@ -155,11 +177,10 @@ Array.prototype.sum = function (prop) {
 let subTotal = carritoStorage.sum("precio")
 
 function carritoPrecio() {
-    $("#totales").html(`<div>
-                                <p>Gracias por comprar con nosotros :)</p>
-                                <p>Su total en : $${carritoStorage.sum("precio")}</p>
-                        </div>
-    `
+    $("#compraHecha").html(`<div class="col-md-6">  
+                                <p style="margin-top: 17px;">Gracias por su compra, su total fue $${carritoStorage.sum("precio")} </p>
+                            </div>
+                            `
     )
 }
 
@@ -172,16 +193,11 @@ function clearAll() {
 
 
 window.onload = () => {
-    document.getElementById("submitBtn").onclick =  nuevoProducto;
-    document.getElementById("resetBtn").onclick = clearAll;
     document.getElementById("carritoComprar").onclick = carritoPrecio;
 }
 generarOpciones()
 
 
-function busqueda(id) {
-    return datosArmados.find(producto => producto.id === id); 
-}
 
 
 //Animaciones jquery
