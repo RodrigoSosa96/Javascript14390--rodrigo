@@ -61,7 +61,7 @@ function crearElemento(dato) {
                                 <div class="col-md-4 prodID${dato.id}">
                                     <div class="blog-card blog-card-blog">
                                         <div class="blog-card-image">
-                                            <a href="#"> <img class="img" src=${dato.img}> </a>
+                                            <a href="#"> <img class="articulo-img" src=${dato.urlImg}> </a>
                                             <div class="ripple-cont"></div>
                                         </div>
                                         <div class="blog-table">

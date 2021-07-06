@@ -20,19 +20,22 @@ h1 {
   }
   
   .blog-card .blog-card-image {
-    height: 60%;
+    height: 350px;
     position: relative;
-    overflow: hidden;
+    object-fit: cover;
     margin-left: 15px;
     margin-right: 15px;
     margin-top: -30px;
     border-radius: 6px;
     box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
   }
+
   
   .blog-card .blog-card-image img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
+
     border-radius: 6px;
     pointer-events: none;
   }

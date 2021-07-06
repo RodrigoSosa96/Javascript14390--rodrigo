@@ -15,6 +15,7 @@ class articulo{
         this.precio = parseInt(datos.precio);
         this.stock = parseInt(datos.stock);
         this.select = false
+        this.urlImg = datos.urlImg
     }
     vendido(){
             this.stock = this.stock - 1 //Control de stock
