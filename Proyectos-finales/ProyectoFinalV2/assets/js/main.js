@@ -4,17 +4,16 @@
     *   Decidí separarlo en 2 paginas en vez de un spa por cuestión de tiempo
     *   Tarjetas de articulos de Codepen
     TODO: Debo agregar :
-        *Migración a Bootstrap
-        *--Age wall +18
-        !Imagenes de cada bebida 
-            ver mas para ver información
-
-        *Compra por efectivo o tarjeta
-            checkear longitud tarjeta, separar cada 4
-            CVV
-
-        *calcular envio? (Para entrega final)
-
+        //Migración a Bootstrap
+        !   Ordenar código
+        *   Age wall +18
+        //Imagenes de cada bebida 
+        *   (Volver a agregar)Compra por efectivo o tarjeta
+                checkear longitud tarjeta, separar cada 4
+                CVV
+        *Arreglar admin
+            Seguir el total de todas las ventas con un nuevvo array en la api, o objeto en el mismo array?
+            (... array)
 
 
 */
@@ -84,23 +83,28 @@ function crearElemento(dato) {
 
     //*checkea el stock y lo actualiza
     //?porqué no anda si lo escribo fuera?
-    $("#art" + dato.id).click(()=> {
+    $("#art" + dato.id).on('mouseup',()=> {
         if(dato.stock >=1) {
-            dato.vendido(),
+            dato.vendido()
             carrito(dato.id)
             $("#CantTotal").html(`${carritoStorage.length}`)
+
             $("#stock"+dato.id)
                 .html(` <i class="fas fa-clipboard-list"></i> Stock ${dato.stock} `)
                 .prop("disabled", dato.stock > 1 )
         }
-        else {
-            $("#art" + dato.id).prop("disabled", dato.stock === 0) //! como hago para que se desactive en 0? probé de todo, pero siempre lo hace un click después
+    }
+    ).on('click', () => {
+        let precio = carritoStorage.map(articulo => articulo.precio)
+        let carSub = precio.reduce((a,b) => a+ b, 0)
+        $("#subTotal").html(`${carSub}`)
+        if(dato.stock === 0) {
+            $("#art" + dato.id).prop("disabled", dato.stock === 0) //! 3 entregas para que se ponga 0 cuando debe
             $("#art" + dato.id).css({  "background-color": "grey",
                                     "color": "black",
                                     "border": "1px solid black"})
         }
-    }
-    )
+    })
 }
 /*
     *Generar Carrito(modificar)
@@ -110,23 +114,40 @@ function crearElemento(dato) {
 */
 const carritoStorage = []
 
-//*----Checkea el carrito
-function checkStorage (key) {
-    if (key in localStorage) {
-        console.log("Hay carrito")
-    }else {
-        console.log("No hay carrito")
-        //makeStorage(datos)
-    }
-}
-checkStorage('carrito')
 
-//crea carrito
-function makeStorageTEST() {
-    $.ajax(settingsPUT).done(function (response) {
-        console.log(response)
-    })
+//Pre checkeo de carrito
+function preCarrito() {
+    if('carrito' in localStorage) {
+        const carritoParse = JSON.parse(localStorage.getItem('carrito'))
+        for(let e of carritoParse) {
+            carritoStorage.push(new articulo(e))
+        }
+        
+    }
+    crearCarrito()
 }
+preCarrito()
+// Se llama on click
+function carrito(ids){
+    item = datosArmados.find(producto => producto.id === ids)
+    carritoStorage.push(item)
+    carritoJSON = JSON.stringify(carritoStorage)
+    localStorage.setItem("carrito", carritoJSON)    
+    crearCarrito()
+}
+
+
+//* Crea el carrito
+function crearCarrito() {
+    let body = document.getElementById("tablaCarrito").children[1];
+    let inner = "";
+    for (const e of carritoStorage) {
+        inner += `<tr><td>${e.categoria}</td><td>${e.marca}</td><td>${e.features}</td><td>1</td><td>${e.precio}</td></tr>`;
+    }
+    body.innerHTML = inner;
+}
+
+
 
 function makeCarrito () {
     const carritoParse = JSON.parse(localStorage.getItem(''))
@@ -138,29 +159,6 @@ function makeCarrito () {
 
 
 
-function test() {
-    if ("carrito" in localStorage) {
-        
-    }
-    else {
-        
-    }
-}
-
-
-function carrito(ids){
-    item = datosArmados.find(producto => producto.id === ids)
-    carritoStorage.push(item)
-    carritoJSON = JSON.stringify(carritoStorage)
-    localStorage.setItem("carrito", carritoJSON)
-    let body = document.getElementById("tablaCarrito").children[1];
-    let inner = "";
-    for (const e of carritoStorage) {
-        inner += `<tr><td>${e.categoria}</td><td>${e.marca}</td><td>${e.features}</td><td>1</td><td>${e.precio}</td></tr>`;
-    }
-    body.innerHTML = inner;
-    
-}
 
 
 
@@ -176,7 +174,8 @@ Array.prototype.sum = function (prop) {
 //Suma de carrito
 let subTotal = carritoStorage.sum("precio")
 
-function carritoPrecio() {
+function carritoTotal() {
+
     $("#compraHecha").html(`<div class="col-md-6">  
                                 <p style="margin-top: 17px;">Gracias por su compra, su total fue $${carritoStorage.sum("precio")} </p>
                             </div>
@@ -193,9 +192,8 @@ function clearAll() {
 
 
 window.onload = () => {
-    document.getElementById("carritoComprar").onclick = carritoPrecio;
+    document.getElementById("carritoComprar").onclick = carritoTotal;
 }
-generarOpciones()
 
 
 
