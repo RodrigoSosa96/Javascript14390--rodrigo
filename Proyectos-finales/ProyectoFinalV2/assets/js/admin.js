@@ -8,12 +8,31 @@
 */
 
 //*
-
-
-function generarOpciones () {
+(function generarOpciones () {
     for (const elemento of categoria) {
         $("#categoriaProducto").append(`<option value="${elemento}">${elemento}</option>`)}
-}
+})()
+
+$.ajax(settingsGET).done(function (response) {
+    $('#loading-image').hide();
+    console.log(response)
+    datosAJAX = response
+
+    if (response.record.length === 12) {
+        console.log("Datos sin tocar")
+
+    }else {
+        console.log("Alguien cargo datos")
+    }
+    datosAJAX = response.record
+    $('#opciones').show()
+    crearDatos(datosAJAX)
+    tarjetas()
+
+    return datosAJAX
+})
+
+
 
 
 
@@ -35,3 +54,10 @@ function nuevoProducto(){
     //filtrarEvento();
 }
 
+
+
+
+
+window.onload = () => {
+    document.getElementById("submitBtn").onclick =  nuevoProducto;
+}

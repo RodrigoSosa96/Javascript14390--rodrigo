@@ -33,4 +33,8 @@ body {
 
     margin: 0 auto;
     margin-bottom: 3em;
-  }
+}
+
+#carritoReset {
+    margin-top: 1em;
+}

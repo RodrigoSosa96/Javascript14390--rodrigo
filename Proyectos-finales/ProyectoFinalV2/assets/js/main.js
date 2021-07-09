@@ -5,6 +5,8 @@
     *   Tarjetas de articulos de Codepen
     TODO: Debo agregar :
         //Migración a Bootstrap
+        //localStorage
+            falta migrar animaciones a bootstrap
         !   Ordenar código
         *   Age wall +18
         //Imagenes de cada bebida 
@@ -32,13 +34,18 @@ $.ajax(settingsGET).done(function (response) {
         console.log("Alguien cargo datos")
     }
     datosAJAX = response.record
-
+    $('#opciones').show()
     crearDatos(datosAJAX)
+    tarjetas()
+
+    return datosAJAX
+})
+
+function tarjetas() {
     for(let dato of datosArmados) {
         crearElemento(dato)
     }
-    return datosAJAX
-})
+}
 
 
 //*Parseo de datos
@@ -54,6 +61,7 @@ function crearDatos(data) {
 
 
 ///--------Generadores de HTML
+
 
 //Generador de tarjetas en la página
 function crearElemento(dato) {
@@ -82,7 +90,6 @@ function crearElemento(dato) {
                                 `);
 
     //*checkea el stock y lo actualiza
-    //?porqué no anda si lo escribo fuera?
     $("#art" + dato.id).on('mouseup',()=> {
         if(dato.stock >=1) {
             dato.vendido()
@@ -106,6 +113,19 @@ function crearElemento(dato) {
         }
     })
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
     *Generar Carrito(modificar)
     Checkeo de localstorage por si ya hay articulos almacenados
@@ -149,14 +169,6 @@ function crearCarrito() {
 
 
 
-function makeCarrito () {
-    const carritoParse = JSON.parse(localStorage.getItem(''))
-    for(let e of carritoParse) {
-        carritoStorage.push(e)
-    }
-
-}
-
 
 
 
@@ -181,7 +193,36 @@ function carritoTotal() {
                             </div>
                             `
     )
+    //mandar compra
+    localStorage.clear()
 }
+
+
+
+
+/*
+    *Ordenar carrito por categorías
+*/
+// StackOverflow <3
+function dynamicSort(property) {
+    var sortOrder = 1;
+    if(property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+    }
+    return function (a,b) {
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result * sortOrder;
+    }
+}
+$('#ordenar').on('change', function() {
+    var value = $(this).val();
+    console.log(value)
+    $('#tablaCarrito').children().eq(1).html(` `)
+    carritoStorage.sort(dynamicSort(value))
+    console.table(carritoStorage)
+    crearCarrito()
+});
 
 
 
@@ -192,11 +233,9 @@ function clearAll() {
 
 
 window.onload = () => {
-    document.getElementById("carritoComprar").onclick = carritoTotal;
+    document.getElementById("carritoReset").onclick = clearAll;
+    document.getElementById("carritoComprar").onclick = carritoTotal
 }
-
-
-
 
 //Animaciones jquery
 
@@ -208,7 +247,6 @@ $(".container").fadeIn(2500, function() {
 })
 
 
-//Cómo hago para hacer un scroll al final del div?, pero que el final quede abajo de la ventana, no arriba
 $('#submitBtn').click( function(e) { 
     $("html, body").animate({
         scrollTop: $("#listaProductos").get(0).scrollHeight

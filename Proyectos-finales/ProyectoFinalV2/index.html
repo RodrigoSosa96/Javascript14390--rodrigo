@@ -29,11 +29,13 @@
                             </a></div>
                     </nav>
                     <h3 class="text-dark mb-4" style="color: var(--bs-blue);">Articulos</h3>
+                    
                         <div class="container">
+
                             <div id="listaProductos" class="row">
                                 <div id="loading-image" class="spinner-border text-secondary vertical-center" role="status" style="display:none">
                                     <span class="sr-only">Loading...</span>
-                                  </div>
+                                </div>
                                 <!-- js productos-->
                             </div>
                         </div>
@@ -45,17 +47,14 @@
                             <div class="col"></div>
                             <div class="row">
                                 <div class="col-md-6 text-nowrap">
-                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label class="form-label">Ordenar por&nbsp; &nbsp;<select class="d-inline-block form-select form-select-sm">
+                                    <div  class="dataTables_length" aria-controls="dataTable"><label class="form-label">Ordenar por&nbsp; &nbsp;
+                                        <select id="ordenar" class="d-inline-block form-select form-select-sm">
                                                 <option value="categoria" selected="">Categoría</option>
                                                 <option value="marca">Marca</option>
-                                                <option value="caracteristicas">Características</option>
                                                 <option value="precio">Precio</option>
-                                                <option value="stock">Stock</option>
                                             </select>&nbsp;</label></div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="text-md-end dataTables_filter" id="dataTable_filter"><label class="form-label"><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
-                                </div>
+
                             </div>
                             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                                 <table class="table my-0" id="tablaCarrito">
@@ -69,7 +68,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+                                        <!-- Carrito [1]child-->
                                     </tbody>
                                     <tfoot>
                                         <tr>
@@ -87,6 +86,27 @@
                                 <!--Gracias por su compra-->
                             </div>
                             <div class="col"><button class="btn btn-primary" type="button" id="carritoComprar">Comprar</button></div>
+                            <div class="col"><button class="btn btn-primary" type="button" id="carritoReset">reset</button></div>
+                            <div class="col"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#carritoCheck">Carrrito v2</button></div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="carritoCheck" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                    ...
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <!---->
                         </div>
                     </div>
                 </div>

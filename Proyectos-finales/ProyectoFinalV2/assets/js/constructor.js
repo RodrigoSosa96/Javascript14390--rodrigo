@@ -24,12 +24,9 @@ class articulo{
     aplicarDescuento(descuento) {
         this.precio = this.precio - (this.precio * (descuento / 100))
     }
-    sumarIva(){
-        this.precio = this.precio + (this.precio * 0.21);
-    }
     selected(){
         //! agregar para seleccionar en vez de crear otro array? reset con un filter y .select = false a todo?
-        //! o es mejor tener arrays separados?
+        //! no usado
         this.select = true
     }
 }
