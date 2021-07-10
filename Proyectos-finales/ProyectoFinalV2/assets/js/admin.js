@@ -26,10 +26,9 @@ $.ajax(settingsGET).done(function (response) {
     }
     datosAJAX = response.record
     $('#opciones').show()
-    crearDatos(datosAJAX)
-    tarjetas()
-
-    return datosAJAX
+    //crearDatos(datosAJAX)
+    //tarjetas()
+    return response
 })
 
 
@@ -45,11 +44,13 @@ function nuevoProducto(){
         marca         : document.getElementById("marcaProducto").value,
         features      : document.getElementById("featuresProducto").value,
         precio        : document.getElementById("precioProducto").value,
-        stock         : document.getElementById("stockProducto").value
+        stock         : document.getElementById("stockProducto").value,
+        urlImg        : document.getElementById("urlImg").value
+
     }
-    datosArmados.push(new articulo(nuevoRegistro));
-    let ultimoPush = datosArmados.length - 1
-    crearElemento(datosArmados[ultimoPush])
+    datosAjax.push(nuevoRegistro);
+    let ultimoPush = datosAJAX.length - 1
+    //crearElemento(datosAJAX[ultimoPush])
     //!makeStorage(datosArmados) //va a postear los datos
     //filtrarEvento();
 }
@@ -61,3 +62,15 @@ function nuevoProducto(){
 window.onload = () => {
     document.getElementById("submitBtn").onclick =  nuevoProducto;
 }
+
+
+//! Migrar
+$('#submitBtn').click( function(e) { 
+    $("html, body").animate({
+        scrollTop: $("#listaProductos").get(0).scrollHeight
+    }, 750);
+} ).delay(2000).animate({
+    scrollTop: $("#submitBtn").offset().top
+}, 2000);
+
+

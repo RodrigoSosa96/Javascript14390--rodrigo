@@ -25,11 +25,6 @@ class articulo{
     aplicarDescuento(descuento) {
         this.precio = this.precio - (this.precio * (descuento / 100))
     }
-    selected(){
-        //! agregar para seleccionar en vez de crear otro array? reset con un filter y .select = false a todo?
-        //! no usado
-        this.select = true
-    }
 }
 
 

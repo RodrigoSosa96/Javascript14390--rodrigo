@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Table - Brand</title>
+    <title>Altos Viñedos</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
@@ -41,9 +41,9 @@
                         </div>
                     <div class="card shadow">
                         <div class="card-header py-3">
-                            <p class="text-primary m-0 fw-bold" style="font-size: 28px;">Carrito&nbsp;&nbsp;<button class="btn btn-primary" type="button"><i class="fa fa-arrow-down"></i></button></p>
+                            <p class="text-primary m-0 fw-bold" style="font-size: 28px;">Carrito&nbsp;&nbsp;<button id="showCart" class="btn btn-primary" type="button"><i class="fa fa-arrow-down"></i></button></p>
                         </div>
-                        <div class="card-body" id="toggleList" style="display: ;"><!-- cambiar!!!!!-->
+                        <div class="card-body" id="toggleList" style="display: none;"><!-- cambiar!!!!!-->
                             <div class="col"></div>
                             <div class="row">
                                 <div class="col-md-6 text-nowrap">
@@ -81,9 +81,6 @@
                                         </tr>
                                     </tfoot>
                                 </table>
-                            </div>
-                            <div id="compraHecha" class="row">
-                                <!--Gracias por su compra-->
                             </div>
                             <div class="col"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCarrito" id="carritoComprar" disabled>Comprar</button></div>
                             <div class="col"><button class="btn btn-primary" type="button" id="carritoReset">Reset</button></div>

@@ -250,29 +250,9 @@ window.onload = () => {
 
 }
 
-//Animaciones jquery
-//! migrar
-
+//Animacion carrito
 $("#showCart").click(() => { 
     $("#toggleList").toggle("slow");
 });
-$(".container").fadeIn(2500, function() {
-    $("h1").fadeIn(3500)
-})
 
 
-$('#submitBtn').click( function(e) { 
-    $("html, body").animate({
-        scrollTop: $("#listaProductos").get(0).scrollHeight
-    }, 750);
-} ).delay(2000).animate({
-    scrollTop: $("#submitBtn").offset().top
-}, 2000);
-
-
-
-
-//Animamos sus propiedades CSS con animate
-
-$("h1").fadeIn("fast")
-$("svg").delay(2500).animate({  width: "380px", display: "block"}, 2000) //.mouseover(() => $("svg").animate({filter: "brightness(150%)"}))
