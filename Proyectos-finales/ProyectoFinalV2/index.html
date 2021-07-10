@@ -85,23 +85,52 @@
                             <div id="compraHecha" class="row">
                                 <!--Gracias por su compra-->
                             </div>
-                            <div class="col"><button class="btn btn-primary" type="button" id="carritoComprar">Comprar</button></div>
-                            <div class="col"><button class="btn btn-primary" type="button" id="carritoReset">reset</button></div>
-                            <div class="col"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#carritoCheck">Carrrito v2</button></div>
+                            <div class="col"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCarrito" id="carritoComprar" disabled>Comprar</button></div>
+                            <div class="col"><button class="btn btn-primary" type="button" id="carritoReset">Reset</button></div>
                             <!-- Modal -->
-                            <div class="modal fade" id="carritoCheck" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
+                            <div class="modal fade" id="modalCarrito" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Carrito</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                    ...
+                                        <div class="d-flex justify-content-between align-items-lg-center">
+                                            <p>Subtotal:</p>
+                                            <p id="modalSubTotal">$####</p>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-lg-center">
+                                            <p>Aplicar Descuento</p><input required id="descuento" type="number" placeholder="Numero = desc aplicado" min="1" max="100"/>
+
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-lg-center">
+                                            <p>Iva:</p>
+                                            <p id="iva">$####</p>
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                    <button id="finalCompra"  type=submit class="btn btn-primary" data-bs-target="#modalCompra" data-bs-toggle="modal" data-bs-dismiss="modal">Comprar</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="modalCompra" aria-hidden="true" aria-labelledby="modalCompra" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalToggleLabel2">Carrito</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="d-flex justify-content-between align-items-lg-center">
+                                            <!-- Final compra-->
+                                            <p id="gracias">Gracias por realizar su compra! Su total fue $####</p>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                     </div>
                                 </div>
                                 </div>

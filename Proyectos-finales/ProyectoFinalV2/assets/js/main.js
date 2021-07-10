@@ -57,9 +57,6 @@ function crearDatos(data) {
     return console.table(datosArmados)//test
 }
 
-
-
-
 ///--------Generadores de HTML
 
 
@@ -94,6 +91,7 @@ function crearElemento(dato) {
         if(dato.stock >=1) {
             dato.vendido()
             carrito(dato.id)
+            $("#carritoComprar").prop('disabled', false)
             $("#CantTotal").html(`${carritoStorage.length}`)
 
             $("#stock"+dato.id)
@@ -138,16 +136,19 @@ const carritoStorage = []
 //Pre checkeo de carrito
 function preCarrito() {
     if('carrito' in localStorage) {
+        $("#carritoComprar").prop('disabled', false)
         const carritoParse = JSON.parse(localStorage.getItem('carrito'))
         for(let e of carritoParse) {
             carritoStorage.push(new articulo(e))
         }
+        let precio = carritoStorage.map(articulo => articulo.precio)
+        let carSub = precio.reduce((a,b) => a+ b, 0)
+        $("#subTotal").html(`${carSub}`)
         
     }
     crearCarrito()
 }
 preCarrito()
-// Se llama on click
 function carrito(ids){
     item = datosArmados.find(producto => producto.id === ids)
     carritoStorage.push(item)
@@ -156,8 +157,6 @@ function carrito(ids){
     crearCarrito()
 }
 
-
-//* Crea el carrito
 function crearCarrito() {
     let body = document.getElementById("tablaCarrito").children[1];
     let inner = "";
@@ -166,12 +165,6 @@ function crearCarrito() {
     }
     body.innerHTML = inner;
 }
-
-
-
-
-
-
 
 
 //Honestamente StackOverflow para sumar arrays mas rápido 
@@ -185,20 +178,6 @@ Array.prototype.sum = function (prop) {
 
 //Suma de carrito
 let subTotal = carritoStorage.sum("precio")
-
-function carritoTotal() {
-
-    $("#compraHecha").html(`<div class="col-md-6">  
-                                <p style="margin-top: 17px;">Gracias por su compra, su total fue $${carritoStorage.sum("precio")} </p>
-                            </div>
-                            `
-    )
-    //mandar compra
-    localStorage.clear()
-}
-
-
-
 
 /*
     *Ordenar carrito por categorías
@@ -226,6 +205,39 @@ $('#ordenar').on('change', function() {
 
 
 
+/**
+    Modal carrito V2
+    Abre modal con subtotal, iva de los productos, y pregunta descuento
+ */
+
+function descuentos(data) {
+    carritoStorage.forEach(articulo => {
+        articulo.aplicarDescuento(data)
+    });
+    return console.table(carritoStorage)//test
+}
+
+function modalCarrito () {
+    $('#modalSubTotal').text(`$ ${carritoStorage.sum('precio')}`)
+    $('#iva').text(`$ ${carritoStorage.sum('iva').toFixed(2)}`)
+}
+
+
+
+$('#finalCompra').on('click', () => {
+    if($('#descuento').val().lenght != 0 ){
+        descuentos($('#descuento').val())
+    }
+    $('#gracias').text(`Gracias por realizar su compra! Su total fue $${carritoStorage.sum('precio').toFixed(2)} `)
+    localStorage.clear();
+})
+$('#modalCompra').on('hidden.bs.modal', () => {
+    clearAll()
+})
+
+
+
+
 function clearAll() {
     localStorage.clear();
     location.reload();
@@ -234,10 +246,12 @@ function clearAll() {
 
 window.onload = () => {
     document.getElementById("carritoReset").onclick = clearAll;
-    document.getElementById("carritoComprar").onclick = carritoTotal
+    document.getElementById("carritoComprar").onclick = modalCarrito
+
 }
 
 //Animaciones jquery
+//! migrar
 
 $("#showCart").click(() => { 
     $("#toggleList").toggle("slow");

@@ -16,6 +16,7 @@ class articulo{
         this.stock = parseInt(datos.stock);
         this.select = false
         this.urlImg = datos.urlImg
+        this.iva = (21 * datos.precio) / 100
     }
     vendido(){
             this.stock = this.stock - 1 //Control de stock
