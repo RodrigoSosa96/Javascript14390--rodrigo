@@ -13,10 +13,9 @@ class articulo{
         this.marca = datos.marca;
         this.features = datos.features
         this.precio = parseInt(datos.precio);
-        this.stock = parseInt(datos.stock);
-        this.select = false
-        this.urlImg = datos.urlImg
         this.iva = (21 * datos.precio) / 100
+        this.stock = parseInt(datos.stock);
+        this.urlImg = datos.urlImg
     }
     vendido(){
             this.stock = this.stock - 1 //Control de stock

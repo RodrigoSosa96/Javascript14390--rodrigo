@@ -17,7 +17,7 @@
             Seguir el total de todas las ventas con un nuevvo array en la api, o objeto en el mismo array?
             (... array)
 
-
+        !   Debí deshabilitar admin ya que tengo problemas mandando los datos por ajax :/
 */
 
 
@@ -130,7 +130,6 @@ function crearElemento(dato) {
 
 
 */
-const carritoStorage = []
 
 
 //Pre checkeo de carrito
@@ -145,8 +144,8 @@ function preCarrito() {
         let carSub = precio.reduce((a,b) => a+ b, 0)
         $("#subTotal").html(`${carSub}`)
         
+        crearCarrito()
     }
-    crearCarrito()
 }
 preCarrito()
 function carrito(ids){
@@ -214,8 +213,9 @@ function descuentos(data) {
     carritoStorage.forEach(articulo => {
         articulo.aplicarDescuento(data)
     });
-    return console.table(carritoStorage)//test
+    return console.table(carritoStorage)
 }
+
 
 function modalCarrito () {
     $('#modalSubTotal').text(`$ ${carritoStorage.sum('precio')}`)
@@ -228,13 +228,18 @@ $('#finalCompra').on('click', () => {
     if($('#descuento').val().lenght != 0 ){
         descuentos($('#descuento').val())
     }
+    //$.ajax(settingsVenta)
     $('#gracias').text(`Gracias por realizar su compra! Su total fue $${carritoStorage.sum('precio').toFixed(2)} `)
-    localStorage.clear();
+    carritoStorage.forEach(articulo => { // Elimina datos inncecesarios para el json
+        delete articulo["urlImg"]
+        delete articulo["features"]
+        delete articulo["urlImg"]
+    })
+    console.table(carritoStorage)
 })
 $('#modalCompra').on('hidden.bs.modal', () => {
     clearAll()
 })
-
 
 
 
@@ -255,4 +260,12 @@ $("#showCart").click(() => {
     $("#toggleList").toggle("slow");
 });
 
+
+
+$("#test").on('click', () => {
+    $.ajax(settingsVenta2).done((response) => {
+        console.table(response.metadata)
+        console.table(response.record)
+    })
+})
 

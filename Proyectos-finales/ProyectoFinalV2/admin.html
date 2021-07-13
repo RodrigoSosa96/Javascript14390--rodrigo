@@ -86,14 +86,12 @@
                                         <div class="row">
                                             <div class="col">
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="categoriaProducto"><strong>Categoría</strong></label></div><select class="form-select">
-                                                    <optgroup id="categoriaProducto" label="Categoría">
-
+                                                    <label class="form-label" for="categoriaProducto"><strong>Categoría</strong></label></div>
+                                                    <select id="categoriaProducto" class="form-select">
                                                         <!--
                                                             <option value="otro">otro</option>
                                                         -->
-                                                    </optgroup>
-                                                </select>
+                                                    </select>
                                             </div>
                                             <div class="col">
                                                 <div class="mb-3"><label class="form-label" for="marca"><strong>Marca</strong></label><input type="text" class="form-control" name="marca" placeholder="Marca" id="marcaProducto"/></div>
@@ -114,8 +112,11 @@
                                                 <div class="mb-3"><label class="form-label" for="imgurl"><strong>URL de imagen</strong></label><input type="text" class="form-control"  placeholder="Características" name="caracteristicas" id="urlImg" /></div>
                                             </div>
                                         </div>
-                                        <div class="mb-3"><button  id="submitBtn" class="btn btn-primary btn-sm" type="submit" style="margin-right: 23px;margin-top: 6px;">Guardar</button><button class="btn btn-primary btn-sm" type="submit" style="background: var(--bs-danger);margin-top: 6px;">Reset</button></div>
                                     </form>
+                                    <div class="mb-3">
+                                        <button  id="submitBtn" class="btn btn-primary btn-sm" style="margin-right: 23px;margin-top: 6px;">Guardar</button>
+                                        <button class="btn btn-primary btn-sm"  style="background: var(--bs-danger);margin-top: 6px;">Reset</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

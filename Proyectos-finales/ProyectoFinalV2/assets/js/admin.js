@@ -8,10 +8,14 @@
 */
 
 //*
+
 (function generarOpciones () {
     for (const elemento of categoria) {
         $("#categoriaProducto").append(`<option value="${elemento}">${elemento}</option>`)}
 })()
+
+
+let datosAJAX = []
 
 $.ajax(settingsGET).done(function (response) {
     $('#loading-image').hide();
@@ -27,19 +31,17 @@ $.ajax(settingsGET).done(function (response) {
     datosAJAX = response.record
     $('#opciones').show()
     //crearDatos(datosAJAX)
-    //tarjetas()
-    return response
+    //tarjetas() 
+    
 })
 
 
 
 
-
 //*Agregar elementos a los articulos
-
 function nuevoProducto(){
     let nuevoRegistro = {
-        id            : datosArmados.length + 1,
+        id            : datosAJAX.length + 1,
         categoria     : document.getElementById("categoriaProducto").value,
         marca         : document.getElementById("marcaProducto").value,
         features      : document.getElementById("featuresProducto").value,
@@ -49,10 +51,11 @@ function nuevoProducto(){
 
     }
     datosAjax.push(nuevoRegistro);
-    let ultimoPush = datosAJAX.length - 1
+    //let ultimoPush = datosAJAX.length - 1
     //crearElemento(datosAJAX[ultimoPush])
     //!makeStorage(datosArmados) //va a postear los datos
     //filtrarEvento();
+    return console.log(nuevoRegistro)
 }
 
 
@@ -65,12 +68,12 @@ window.onload = () => {
 
 
 //! Migrar
-$('#submitBtn').click( function(e) { 
-    $("html, body").animate({
-        scrollTop: $("#listaProductos").get(0).scrollHeight
-    }, 750);
-} ).delay(2000).animate({
-    scrollTop: $("#submitBtn").offset().top
-}, 2000);
+//$('#submitBtn').click( function(e) { 
+//    $("html, body").animate({
+//        scrollTop: $("#listaProductos").get(0).scrollHeight
+//    }, 750);
+//} ).delay(2000).animate({
+//    scrollTop: $("#submitBtn").offset().top
+//}, 2000);
 
 
