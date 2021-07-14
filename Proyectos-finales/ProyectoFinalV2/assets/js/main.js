@@ -16,8 +16,8 @@
         *Arreglar admin
             Seguir el total de todas las ventas con un nuevvo array en la api, o objeto en el mismo array?
             (... array)
-
-        !   Debí deshabilitar admin ya que tengo problemas mandando los datos por ajax :/
+        *fix:
+            *Con cada venta se manda el array del carrito por get a una carpeta (collection) de los arrays para luego hacer un fetch un trabajar con todo (aun no se bien como)
 */
 
 
@@ -111,16 +111,6 @@ function crearElemento(dato) {
         }
     })
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -235,6 +225,28 @@ $('#finalCompra').on('click', () => {
         delete articulo["features"]
         delete articulo["urlImg"]
     })
+    $.ajax({
+        async: true,
+        crossDomain: true,
+        url: "https://api.jsonbin.io/v3/b",
+        method: "POST",
+        dataType: "json",
+        headers: {
+            "Content-Type": "application/json",
+            "X-Master-Key": apiKey,
+            "X-Bin-Name": `compra_${fecha()}`,
+            "X-Collection-Id" : "60de233e9328b059d7b47417",
+            
+        },
+        data: JSON.stringify(carritoStorage),
+        statusCode: {
+            200: () => console.log("Success"),
+            400: () => console.log(" :c "),
+            401: () => console.log("401 Unauthorized"),
+            403: () => console.log("403 Forbidden"),
+            404: () => console.log("404 Not Found"),
+        }
+    }).done((response) => console.log(response))
     console.table(carritoStorage)
 })
 $('#modalCompra').on('hidden.bs.modal', () => {

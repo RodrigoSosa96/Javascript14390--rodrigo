@@ -33,25 +33,8 @@ var settingsGET = {
         404: () => console.log("404 Not Found"),
     }
 }
-var settingsPUT = {
-    async: true,
-    crossDomain: true,
-    url: ajaxURL,
 
-    method: "PUT",
-    headers: {
-        "Content-Type": "application/json",
-        "X-Master-Key": apiKey,
-    },
-    data: datosArmados,
-    statusCode: {
-        200: () => console.log("Success"),
-        400: () => console.log("400 Bad Request"),
-        401: () => console.log("401 Unauthorized"),
-        403: () => console.log("403 Forbidden"),
-        404: () => console.log("404 Not Found"),
-    }
-}
+
 //!futuro para compras realizadas
 
 function fecha () {
