@@ -90,16 +90,12 @@ const settingsVenta = {
 const settingsFetch = {
     async: true,
     crossDomain: true,
-    url: "https://api.jsonbin.io/v3/c/<COLLECTION_ID>/bins",
-    
+    url: "https://api.jsonbin.io/v3/c/60de233e9328b059d7b47417/bins",    
     method: "GET",
     headers: {
-        "Content-Type": "application/json",
-        "X-Master-Key": apiKey,
-        "X-Collection-Id" : "60de233e9328b059d7b47417",
-        
+        "X-Master-Key": apiKey,        
     },
-    data: JSON.stringify(carritoStorage),
+    data: {},
     statusCode: {
         200: () => console.log("Success"),
         400: () => console.log("400 Bad Request"),

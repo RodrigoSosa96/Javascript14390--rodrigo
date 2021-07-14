@@ -84,18 +84,39 @@ function actualizarDatos() {
 
 
 
+
+/*
+    !No puedo hacer que el array se junte, asi que no lo usé
+    *está deshahibitado
+
+$("#obtenerDatos").click(() => {
+    $.ajax(settingsFetch).done((r) => {
+        for (const a of r) {
+            let url = a.record
+            console.log(url)
+            $.ajax({
+                async: true,
+                crossDomain: true,
+                url: "https://api.jsonbin.io/v3/b/"+ url +"/latest",
+                method: "GET",
+                headers: {
+                    "X-Master-Key": apiKey,
+                },
+                data: {}
+            }).done((response) => {
+                fetchBins.push(response.record)
+            })
+        }
+        test = [].concat.apply([], fetchBins)//! esta bien hecho, pero no funciona :/
+    })
+})
+
+ */
+
+
+
+
 window.onload = () => {
     document.getElementById("submitBtn").onclick =  nuevoProducto;
 }
-
-
-//! Migrar
-//$('#submitBtn').click( function(e) { 
-//    $("html, body").animate({
-//        scrollTop: $("#listaProductos").get(0).scrollHeight
-//    }, 750);
-//} ).delay(2000).animate({
-//    scrollTop: $("#submitBtn").offset().top
-//}, 2000);
-
 
